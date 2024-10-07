@@ -5,9 +5,11 @@ import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import database, { CONFIG_DATABASE } from '~/configs/database';
+import { PromptModule } from '@/prompt/prompt.module';
 
 @Module({
   imports: [
+    PromptModule,
     ConfigModule.forRoot({
       load: [database],
       envFilePath: `env/.env.${process.env.NODE_ENV}`,
