@@ -17,6 +17,11 @@ export class PromptService {
   }
 
   async createPrompt(input: CreatePromptInput): Promise<PassOutput> {
-    return new PassOutput();
+    const prompt = new this.promptDocumentModel(
+      Prompt.fromCreatePromptInput(input),
+    );
+    await prompt.save();
+
+    return PassOutput.from({});
   }
 }

@@ -1,3 +1,9 @@
-import { OmitTypeBase } from '@/_common/base/schemas/base.schema';
+import { InputType, OmitType } from '@nestjs/graphql';
+import { Prompt } from '@/prompt/schemas/prompt.schema';
 
-export class CreatePromptInput extends OmitTypeBase() {}
+@InputType('CreatePromptInput', { isAbstract: true })
+export class CreatePromptInput extends OmitType(Prompt, [
+  '_id',
+  'createdAt',
+  'updatedAt',
+] as const) {}
