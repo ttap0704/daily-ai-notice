@@ -1,10 +1,11 @@
-import { Field, InputType, ObjectType, OmitType } from '@nestjs/graphql';
+import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { Schema as MongooseSchema } from 'mongoose';
+import { IBase } from '@/_common/base/interfaces/base.interface';
 
 @InputType('BaseInput', { isAbstract: true })
-@ObjectType('BaseObject', { isAbstract: true })
-export class Base {
-  @Field()
+@ObjectType('BaseOutput', { isAbstract: true })
+export class Base implements IBase {
+  @Field(() => String)
   readonly _id: MongooseSchema.Types.ObjectId;
 
   @Field(() => Date)
@@ -12,8 +13,4 @@ export class Base {
 
   @Field(() => Date)
   readonly updatedAt: Date;
-}
-
-export function OmitTypeBase() {
-  return OmitType(Base, ['_id', 'createdAt', 'updatedAt'] as const);
 }

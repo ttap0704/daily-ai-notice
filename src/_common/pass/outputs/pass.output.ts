@@ -1,13 +1,18 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { IsBoolean, IsString } from 'class-validator';
+import { plainToInstance } from 'class-transformer';
 
-@ObjectType('PassOutputObject')
+@ObjectType('PassOutput')
 export class PassOutput {
   @Field(() => Boolean)
   @IsBoolean()
-  pass: boolean;
+  pass: boolean = true;
 
   @Field(() => String)
   @IsString()
-  errorCode: string;
+  errorCode: string = '';
+
+  static from(input: Partial<PassOutput>) {
+    return plainToInstance(PassOutput, input);
+  }
 }

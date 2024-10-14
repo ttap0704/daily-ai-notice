@@ -5,16 +5,18 @@ import { PassOutput } from '@/_common/pass/outputs/pass.output';
 import { CreatePromptInput } from '@/prompt/inputs/create-prompt.input';
 
 @Resolver(() => Prompt)
-export class MoveOptionResolver {
+export class PromptResolver {
   constructor(private promptService: PromptService) {}
 
   @Query(() => [Prompt])
-  async getAllPrompts() {
+  async getAllPrompts(): Promise<Prompt[]> {
     return await this.promptService.getAllPrompts();
   }
 
   @Mutation(() => PassOutput)
-  async createPrompt(@Args('prompt') prompt: CreatePromptInput) {
+  async createPrompt(
+    @Args('prompt') prompt: CreatePromptInput,
+  ): Promise<PassOutput> {
     return await this.promptService.createPrompt(prompt);
   }
 }
