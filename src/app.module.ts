@@ -8,6 +8,7 @@ import database, { CONFIG_DATABASE } from '~/configs/database';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { PromptModule } from '@/prompt/prompt.module';
+import { AnswerModule } from '@/answer/answer.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { PromptModule } from '@/prompt/prompt.module';
       inject: [ConfigService],
     }),
     PromptModule,
+    AnswerModule,
   ],
   controllers: [AppController],
   providers: [AppService],
